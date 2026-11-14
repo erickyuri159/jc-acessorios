@@ -1,0 +1,18 @@
+{
+  "name": "jp-accesorios-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Panel de edición del catálogo de JP Accesorios (Sanity Studio)",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "start": "sanity start"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.69.0",
+    "styled-components": "^6.5.3"
+  }
+}

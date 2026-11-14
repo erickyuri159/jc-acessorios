@@ -1,0 +1,893 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN SYSTEM — JP Accesorios
+   ------------------------------------------------------------
+   Concepto: «Nocturno Prisma».
+
+   La joyería se presenta como una gema tallada a la luz de una
+   vitrina de laboratorio: fondo obsidiana, oro que se comporta
+   como luz y un prisma de tonos de gema (rubí, zafiro, esmeralda,
+   ametista, citrino) como única fuente de color.
+
+   Reglas:
+     · Fondo casi negro con matiz violeta (nunca gris plano).
+     · Oro = luz: degradados, brillos, no color plano.
+     · Color saturado sólo en acentos (prisma, estados, badges).
+     · Tipografía: Bodoni Moda (editorial), Space Grotesk (UI),
+       Anton (carteles grandes).
+     · Geometría: esquinas talladas tipo gema, retículas finas
+       y marcos de instrumento (HUD) para el probador.
+   ============================================================ */
+
+:root {
+  /* Superficies */
+  --noche: #07060b;
+  --noche-2: #0d0b15;
+  --noche-3: #15111f;
+  --noche-4: #1e1830;
+  --noche-5: #2a2140;
+
+  /* Oro (metal) */
+  --oro: #e7be6a;
+  --oro-claro: #f8e6b8;
+  --oro-profundo: #a97c2c;
+  --oro-oscuro: #6d4d17;
+
+  /* Tinta sobre oscuro */
+  --marfil: #f7f2e8;
+  --humo: #a49cb8;
+  --humo-2: #6f6880;
+
+  /* Tonos de gema */
+  --rubi: #ff2e63;
+  --zafiro: #3b82f6;
+  --esmeralda: #00e5a0;
+  --ametis: #a855f7;
+  --citrino: #ffd84d;
+
+  /* Línea / bordes */
+  --linea: rgba(255, 255, 255, 0.1);
+  --linea-fuerte: rgba(255, 255, 255, 0.18);
+
+  --prisma: linear-gradient(
+    100deg,
+    var(--rubi) 0%,
+    var(--citrino) 24%,
+    var(--esmeralda) 48%,
+    var(--zafiro) 72%,
+    var(--ametis) 100%
+  );
+
+  --oro-metalico: linear-gradient(
+    135deg,
+    #fff4d4 0%,
+    #e7be6a 28%,
+    #a97c2c 52%,
+    #f8e6b8 74%,
+    #8a5f1c 100%
+  );
+
+  --ease-lumen: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-noche: var(--noche);
+  --color-noche-2: var(--noche-2);
+  --color-noche-3: var(--noche-3);
+  --color-noche-4: var(--noche-4);
+  --color-noche-5: var(--noche-5);
+
+  --color-oro: var(--oro);
+  --color-oro-claro: var(--oro-claro);
+  --color-oro-profundo: var(--oro-profundo);
+  --color-oro-oscuro: var(--oro-oscuro);
+
+  --color-marfil: var(--marfil);
+  --color-humo: var(--humo);
+  --color-humo-2: var(--humo-2);
+  --color-linea: var(--linea);
+  --color-linea-fuerte: var(--linea-fuerte);
+
+  --color-rubi: var(--rubi);
+  --color-zafiro: var(--zafiro);
+  --color-esmeralda: var(--esmeralda);
+  --color-ametis: var(--ametis);
+  --color-citrino: var(--citrino);
+
+  /* Alias heredados: el sitio ya usaba estos nombres. */
+  --color-tinta: var(--marfil);
+  --color-piedra: var(--humo);
+  --color-crema: var(--noche-2);
+  --color-arena: var(--noche-3);
+  --color-blanco-calido: var(--marfil);
+  --color-vino: var(--rubi);
+  --color-verde: var(--esmeralda);
+
+  --font-sans: var(--font-space);
+  --font-serif: var(--font-bodoni);
+  --font-poster: var(--font-anton);
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+  background-color: var(--noche);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--noche);
+  color: var(--marfil);
+  font-family: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+
+  body a,
+  body button,
+  body [role="button"],
+  body input,
+  body textarea,
+  body select,
+  body label,
+  body .cursor-pointer {
+    cursor: pointer !important;
+  }
+}
+
+.earring-cursor {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 999999;
+  display: block !important;
+  transform: translate(14px, 10px);
+  transition: transform 150ms ease, filter 150ms ease;
+  filter: drop-shadow(0 0 8px rgba(245, 209, 110, 0.8));
+  will-change: left, top, transform;
+}
+
+.earring-cursor.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.earring-cursor.is-hover {
+  transform: translate(14px, 6px) rotate(-12deg) scale(1.25);
+  filter: drop-shadow(0 0 10px rgba(245, 209, 110, 0.9));
+}
+
+.earring-cursor.is-pressed {
+  transform: translate(12px, 8px) scale(0.9) rotate(6deg);
+  filter: drop-shadow(0 0 8px rgba(245, 209, 110, 0.8));
+}
+
+.earring-cursor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .earring-cursor {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--oro);
+  color: var(--noche);
+}
+
+/* Scrollbar oscuro */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--noche-5) var(--noche);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--noche);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--noche-5);
+  border-radius: 999px;
+  border: 2px solid var(--noche);
+}
+
+:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   TIPOGRAFÍA
+   ============================================================ */
+
+.font-display {
+  font-family: var(--font-bodoni), Didot, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+/* Cartel: condensado, mayúsculas, para frases de impacto. */
+.font-poster {
+  font-family: var(--font-anton), Impact, "Arial Narrow", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+/* Etiqueta técnica: versalitas espaciadas. */
+.label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+
+.kicker::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--oro));
+}
+
+/* ============================================================
+   COLOR: ORO Y PRISMA
+   ============================================================ */
+
+.text-oro-metal {
+  background: var(--oro-metalico);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-prisma {
+  background: var(--prisma);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 220% 100%;
+  animation: prisma-correr 9s linear infinite;
+}
+
+@keyframes prisma-correr {
+  to {
+    background-position: 220% 0;
+  }
+}
+
+.text-contorno {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247, 242, 232, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-prisma {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   SUPERFICIES
+   ============================================================ */
+
+/* Cristal: panel translúcido sobre el fondo oscuro. */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid var(--linea);
+  backdrop-filter: blur(14px);
+}
+
+/* Vitrina: marco de producto con halo de gema. */
+.piece-frame {
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(231, 190, 106, 0.14) 0%,
+      rgba(13, 11, 21, 0.9) 55%,
+      rgba(7, 6, 11, 1) 100%
+    );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Halo: luz de gema detrás de una pieza. */
+.halo {
+  position: relative;
+}
+
+.halo::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  background: var(--prisma);
+  filter: blur(60px);
+  opacity: 0.28;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+/* Pieza del hero: balanceo y giro 3D lento (respeta reduced-motion). */
+.hero-piece-sway {
+  transform-style: preserve-3d;
+  animation: pieza-girar 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes pieza-girar {
+  0%,
+  100% {
+    transform: rotateY(-4deg) rotateX(1.5deg) translate3d(0, -6px, 0);
+  }
+  50% {
+    transform: rotateY(4deg) rotateX(-1.5deg) translate3d(0, 8px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-piece-sway {
+    animation: none;
+  }
+}
+
+/* Filete de oro con brillo. */
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(231, 190, 106, 0.55),
+    transparent
+  );
+}
+
+/* ============================================================
+   GEOMETRÍA DE GEMA
+   ============================================================ */
+
+.gem-cut {
+  clip-path: polygon(
+    16px 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    0 100%,
+    0 16px
+  );
+}
+
+.gem-cut-lg {
+  clip-path: polygon(
+    28px 0,
+    100% 0,
+    100% calc(100% - 28px),
+    calc(100% - 28px) 100%,
+    0 100%,
+    0 28px
+  );
+}
+
+.gem-cut-sm {
+  clip-path: polygon(
+    9px 0,
+    100% 0,
+    100% calc(100% - 9px),
+    calc(100% - 9px) 100%,
+    0 100%,
+    0 9px
+  );
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  background: var(--oro-metalico);
+  color: #17110a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  transition:
+    transform 0.3s var(--ease-lumen),
+    box-shadow 0.3s var(--ease-lumen),
+    filter 0.3s var(--ease-lumen);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 12px 30px -12px rgba(231, 190, 106, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 999px;
+  color: var(--marfil);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    border-color 0.3s var(--ease-lumen),
+    background-color 0.3s var(--ease-lumen),
+    color 0.3s var(--ease-lumen);
+}
+
+.btn-outline:hover {
+  border-color: var(--oro);
+  background: var(--oro);
+  color: #17110a;
+}
+
+/* Botón prisma: el acento de color de la marca. */
+.btn-prisma {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  background: var(--prisma);
+  background-size: 220% 100%;
+  color: #0b0710;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  animation: prisma-correr 9s linear infinite;
+  transition:
+    transform 0.3s var(--ease-lumen),
+    filter 0.3s var(--ease-lumen);
+}
+
+.btn-prisma:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+/* ============================================================
+   EFECTOS
+   ============================================================ */
+
+/* Grano: da textura de papel a las superficies oscuras. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+/* Aurora: campo de luz de gema en movimiento. */
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: aurora-flotar 22s var(--ease-lumen) infinite alternate;
+}
+
+.aurora-rubi {
+  background: radial-gradient(circle, var(--rubi) 0%, transparent 68%);
+}
+
+.aurora-zafiro {
+  background: radial-gradient(circle, var(--zafiro) 0%, transparent 68%);
+}
+
+.aurora-esmeralda {
+  background: radial-gradient(circle, var(--esmeralda) 0%, transparent 68%);
+}
+
+.aurora-ametis {
+  background: radial-gradient(circle, var(--ametis) 0%, transparent 68%);
+}
+
+.aurora-oro {
+  background: radial-gradient(circle, var(--oro) 0%, transparent 68%);
+}
+
+@keyframes aurora-flotar {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-5%, 4%, 0) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora {
+    animation: none;
+  }
+}
+
+/* Barrido de brillo sobre superficies doradas. */
+.brillo-linea {
+  position: relative;
+  overflow: hidden;
+}
+
+.brillo-linea::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 48%,
+    transparent 66%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease-lumen);
+}
+
+.brillo-linea:hover::after {
+  transform: translateX(120%);
+}
+
+/* Anillo de prisma giratorio (para piezas y para el AR). */
+.anillo-prisma {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    var(--rubi),
+    var(--citrino),
+    var(--esmeralda),
+    var(--zafiro),
+    var(--ametis),
+    var(--rubi)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: girar 9s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anillo-prisma {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   HUD — INSTRUMENTO DEL PROBADOR
+   ============================================================ */
+
+.hud-marco {
+  position: relative;
+}
+
+.hud-marco::before,
+.hud-marco::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(231, 190, 106, 0.85);
+  pointer-events: none;
+}
+
+.hud-marco::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.hud-marco::after {
+  right: -1px;
+  bottom: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Barrido de escaneo, como en un laboratorio de gemstone. */
+.scanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+.scanline-barrido {
+  position: absolute;
+  inset-inline: 0;
+  height: 32%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 229, 160, 0.22),
+    transparent
+  );
+  animation: barrido 3.4s var(--ease-lumen) infinite;
+}
+
+@keyframes barrido {
+  0% {
+    transform: translateY(-40%);
+  }
+  100% {
+    transform: translateY(340%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanline-barrido {
+    animation: none;
+  }
+}
+
+/* Retícula fina de fondo técnico. */
+.rejilla {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ============================================================
+   CINTA (marquee)
+   ============================================================ */
+
+.cinta-fila {
+  display: flex;
+  width: max-content;
+  animation: cinta 32s linear infinite;
+}
+
+.cinta-fila--lenta {
+  animation-duration: 48s;
+}
+
+@keyframes cinta {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinta-fila {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   ENTRADAS Y ENLACES
+   ============================================================ */
+
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-lumen);
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal-up 0.8s var(--ease-lumen) forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+.image-zoom img {
+  transition: transform 0.9s var(--ease-lumen);
+}
+
+.image-zoom:hover img {
+  transform: scale(1.05);
+}
+
+.container-site {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container-site {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-site {
+    padding-inline: 3rem;
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--linea-fuerte);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+.tag--sale {
+  border-color: rgba(255, 46, 99, 0.9);
+  color: var(--marfil);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255, 46, 99, 0.28) 0%, transparent 70%);
+  box-shadow: 0 0 0 1px rgba(255, 46, 99, 0.25), 0 0 40px -18px var(--rubi);
+}
+
+.tag--low {
+  border-color: rgba(255, 216, 77, 0.9);
+  color: var(--marfil);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255, 216, 77, 0.2) 0%, transparent 70%);
+  box-shadow: 0 0 0 1px rgba(255, 216, 77, 0.22);
+}
+
+/* Etiqueta de disponibilidad con punto de estado. */
+.punto-estado {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--esmeralda);
+  box-shadow: 0 0 10px var(--esmeralda);
+}
+
+.punto-estado--pocas {
+  background: var(--citrino);
+  box-shadow: 0 0 10px var(--citrino);
+}
+
+.punto-estado--pedido {
+  background: var(--zafiro);
+  box-shadow: 0 0 10px var(--zafiro);
+}
+
+/* ============================================================
+   PROBADOR
+   ============================================================ */
+
+.ar-stage {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(42, 33, 64, 0.95) 0%, #0a0810 70%),
+    #0a0810;
+}
+
+.ar-canvas {
+  touch-action: none;
+}
+
+/* ============================================================
+   ACCESIBILIDAD
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

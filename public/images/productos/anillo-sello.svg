@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Anillo de sello dorado">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0e3c4"/>
+      <stop offset="0.45" stop-color="#c0a062"/>
+      <stop offset="1" stop-color="#8d6f36"/>
+    </linearGradient>
+  </defs>
+  <circle cx="300" cy="330" r="160" fill="none" stroke="url(#gold)" stroke-width="26"/>
+  <rect x="216" y="150" width="168" height="132" rx="34" fill="url(#gold)"/>
+  <rect x="240" y="176" width="120" height="80" rx="24" fill="#f6ecd9" opacity="0.35"/>
+</svg>

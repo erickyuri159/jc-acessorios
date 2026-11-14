@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Argolla dorada sobre fondo cálido">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3e8ce"/>
+      <stop offset="0.42" stop-color="#c0a062"/>
+      <stop offset="1" stop-color="#7d6231"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#efe4cd"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="400" cy="430" r="330" fill="url(#glow)"/>
+  <circle cx="400" cy="430" r="330" fill="none" stroke="#e6dcc8" stroke-width="2"/>
+
+  <g fill="none" stroke="url(#gold)" stroke-linecap="round">
+    <path d="M400 210v58" stroke-width="16"/>
+    <circle cx="400" cy="470" r="200" stroke-width="26"/>
+  </g>
+  <circle cx="400" cy="270" r="30" fill="none" stroke="url(#gold)" stroke-width="14"/>
+
+  <g fill="#c0a062" opacity="0.65">
+    <path d="M180 700c8 22 26 40 48 48-22 8-40 26-48 48-8-22-26-40-48-48 22-8 40-26 48-48z"/>
+    <path d="M640 250c6 17 20 31 37 37-17 6-31 20-37 37-6-17-20-31-37-37 17-6 31-20 37-37z"/>
+    <circle cx="640" cy="640" r="9"/>
+    <circle cx="200" cy="180" r="7"/>
+  </g>
+</svg>

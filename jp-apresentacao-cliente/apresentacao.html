@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JP Accesorios · Presentación del proyecto</title>
+<style>
+  :root{
+    --noche:#0f0e11;
+    --noche2:#16141a;
+    --linea:#2a2730;
+    --oro:#e7be6a;
+    --oro-suave:#f3d99b;
+    --humo:#a9a3b0;
+    --texto:#f4f1ea;
+    --ok:#7fd1a6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--noche);
+    color:var(--texto);
+    font-family:"Segoe UI",Inter,system-ui,-apple-system,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:var(--oro)}
+
+  /* ---------- Portada ---------- */
+  .cover{
+    min-height:78vh;display:flex;flex-direction:column;justify-content:center;
+    background:
+      radial-gradient(900px 500px at 75% 15%,rgba(231,190,106,.14),transparent 60%),
+      radial-gradient(700px 600px at 10% 90%,rgba(231,190,106,.06),transparent 60%),
+      var(--noche);
+    border-bottom:1px solid var(--linea);
+    padding:80px 0;
+  }
+  .eyebrow{
+    letter-spacing:.34em;text-transform:uppercase;font-size:.72rem;font-weight:700;
+    color:var(--oro);
+  }
+  .cover h1{
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:clamp(2.6rem,7vw,4.6rem);
+    line-height:1.03;font-weight:600;margin:18px 0 10px;
+  }
+  .cover h1 em{color:var(--oro-suave);font-style:italic}
+  .cover p.lead{color:var(--humo);font-size:1.1rem;max-width:60ch;margin-top:8px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .badge{
+    border:1px solid var(--linea);border-radius:999px;padding:8px 16px;font-size:.82rem;
+    color:var(--texto);background:rgba(255,255,255,.02);
+  }
+  .badge b{color:var(--oro)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:74px 0;border-bottom:1px solid var(--linea)}
+  h2{
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:600;margin-bottom:8px;
+  }
+  .sub{color:var(--humo);margin-bottom:30px;max-width:65ch}
+  h3{font-size:1.05rem;margin-bottom:6px}
+
+  .grid{display:grid;gap:24px}
+  @media(min-width:900px){ .g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)} }
+
+  .card{
+    background:var(--noche2);border:1px solid var(--linea);border-radius:14px;overflow:hidden;
+  }
+  .card .body{padding:22px 22px 24px}
+  .card p{color:var(--humo);font-size:.95rem}
+  .card .num{
+    display:inline-flex;width:30px;height:30px;border:1px solid var(--oro);color:var(--oro);
+    border-radius:50%;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;margin-bottom:12px;
+  }
+  figure{margin:0}
+  figure img{display:block;width:100%;height:auto;border-bottom:1px solid var(--linea)}
+  figcaption{
+    padding:14px 18px;color:var(--humo);font-size:.86rem;background:rgba(255,255,255,.015);
+  }
+
+  .shot{
+    border:1px solid var(--linea);border-radius:14px;overflow:hidden;background:#000;
+    box-shadow:0 30px 60px rgba(0,0,0,.5);
+  }
+  .shot img{display:block;width:100%;height:auto}
+  .shot-cap{color:var(--humo);font-size:.86rem;margin-top:12px}
+
+  .phone{
+    max-width:330px;margin:0 auto;border:10px solid #26232c;border-radius:34px;overflow:hidden;
+    box-shadow:0 30px 60px rgba(0,0,0,.55);
+  }
+  .phone img{display:block;width:100%;height:auto}
+
+  .piezas{
+    display:grid;gap:14px;grid-template-columns:repeat(2,1fr);
+  }
+  @media(min-width:760px){ .piezas{grid-template-columns:repeat(3,1fr)} }
+  .pieza{
+    background:var(--noche2);border:1px solid var(--linea);border-radius:12px;overflow:hidden;
+  }
+  .pieza-img{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 45%,rgba(231,190,106,.10),transparent 68%);
+    padding:18px;
+  }
+  .pieza-img img{width:100%;height:100%;object-fit:contain}
+  .pieza figcaption{padding:12px 14px;border-top:1px solid var(--linea);font-size:.86rem}
+  .pieza figcaption b{display:block;color:var(--texto);font-size:.92rem}
+  .pieza figcaption span{color:var(--oro);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+
+  ul.checks{list-style:none;display:grid;gap:12px;margin-top:6px}
+  ul.checks li{display:flex;gap:12px;color:var(--humo)}
+  ul.checks li::before{content:"✓";color:var(--ok);font-weight:700}
+  ul.checks li b{color:var(--texto);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+  th,td{padding:13px 14px;border-bottom:1px solid var(--linea);text-align:left;vertical-align:top}
+  th{color:var(--oro);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+  td.precio{color:var(--oro-suave);font-weight:700;white-space:nowrap}
+  tr.total td{border-bottom:none;border-top:2px solid var(--oro);font-weight:700;font-size:1.05rem}
+
+  .note{
+    background:rgba(231,190,106,.07);border:1px solid rgba(231,190,106,.35);
+    border-radius:12px;padding:16px 20px;color:var(--humo);font-size:.92rem;margin-top:22px;
+  }
+  .note b{color:var(--texto)}
+
+  .kpis{display:grid;gap:16px;grid-template-columns:repeat(2,1fr);margin-top:8px}
+  @media(min-width:760px){ .kpis{grid-template-columns:repeat(4,1fr)} }
+  .kpi{background:var(--noche2);border:1px solid var(--linea);border-radius:12px;padding:18px}
+  .kpi .big{font-family:"Cormorant Garamond",serif;font-size:2.1rem;color:var(--oro);line-height:1}
+  .kpi small{color:var(--humo);display:block;margin-top:6px;font-size:.82rem}
+
+  footer{padding:44px 0 70px;color:var(--humo);font-size:.85rem}
+  .print-btn{
+    position:fixed;right:22px;bottom:22px;z-index:50;background:var(--oro);color:#1b1608;
+    border:none;border-radius:999px;padding:14px 22px;font-weight:700;cursor:pointer;
+    box-shadow:0 12px 30px rgba(231,190,106,.35);font-size:.9rem;
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    .print-btn{display:none}
+    section{border-color:#ddd;page-break-inside:avoid}
+    .cover{min-height:auto;background:#fff}
+    .cover h1,.cover h1 em{color:#111}
+    .card,.shot,.kpi{border-color:#ddd;background:#fafafa;box-shadow:none}
+    .pieza{border-color:#ddd;background:#fafafa}
+    .pieza-img{background:#fff}
+    .phone{border-color:#ddd;box-shadow:none}
+    h2,th,.eyebrow,.kpi .big,td.precio,.badge b{color:#8a6a1f}
+    .badge{border-color:#ddd}
+    p,li,td,figcaption,.sub,.shot-cap,.note{color:#333}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Exportar a PDF</button>
+
+<!-- ================= PORTADA ================= -->
+<header class="cover">
+  <div class="wrap">
+    <p class="eyebrow">Propuesta de proyecto · 2026</p>
+    <h1>JP Accesorios<br /><em>tu joyería, ahora también en internet</em></h1>
+    <p class="lead">
+      Una tienda online completa, elegante y lista para vender, con una
+      experiencia única: un <b>probador de realidad aumentada</b> donde la
+      clienta se prueba los collares y pendientes desde su móvil antes de
+      comprar.
+    </p>
+    <div class="badges">
+      <span class="badge"><b>Probador AR</b> · prueba sin descargar nada</span>
+      <span class="badge"><b>Panel propio</b> · cambias todo tú misma</span>
+      <span class="badge"><b>Instagram</b> · importa tus piezas</span>
+      <span class="badge"><b>Móvil primero</b> · como tus clientas</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= RESUMEN ================= -->
+<section>
+  <div class="wrap">
+    <h2>Lo que ya está hecho</h2>
+    <p class="sub">No es una maqueta: es una web real, funcionando, con tus piezas y tu marca.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="big">6</div><small>tipos de página (inicio, colección, ficha, probador y legales)</small></div>
+      <div class="kpi"><div class="big">AR</div><small>probador virtual de collares y pendientes en el navegador</small></div>
+      <div class="kpi"><div class="big">60&nbsp;s</div><small>o al instante: lo que publiques aparece ya en la web</small></div>
+      <div class="kpi"><div class="big">100%</div><small>privacidad: la cámara nunca sale del móvil de la clienta</small></div>
+    </div>
+    <ul class="checks" style="margin-top:26px">
+      <li><b>Tienda online</b> — catálogo, ficha de producto, carrito y proceso de compra.</li>
+      <li><b>Probador de realidad aumentada</b> — la pieza se coloca sobre la clienta en tiempo real.</li>
+      <li><b>Panel de gestión (Sanity)</b> — la dueña crea y edita piezas, precios, fotos y textos.</li>
+      <li><b>Ofertas automáticas</b> — “OFERTA −XX%” y “ÚLTIMAS UNIDADES” aparecen solas.</li>
+      <li><b>Importación desde Instagram</b> — las piezas del perfil llegan al panel como borrador.</li>
+      <li><b>Todo legal</b> — aviso legal, privacidad, cookies y condiciones de venta.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= INICIO ================= -->
+<section>
+  <div class="wrap">
+    <h2>Página de inicio</h2>
+    <p class="sub">
+      La primera impresión. Presenta la marca, la pieza destacada y lleva a la
+      clienta de la mano hasta el probador y la compra.
+    </p>
+    <div class="shot">
+      <img src="capturas/01-home-desktop.png" alt="Página de inicio de JP Accesorios" />
+    </div>
+    <p class="shot-cap">Inicio · ordenador. En el móvil se adapta igual de bien (abajo).</p>
+  </div>
+</section>
+
+<!-- ================= MOVIL ================= -->
+<section>
+  <div class="wrap">
+    <h2>Diseñada para el móvil</h2>
+    <p class="sub">
+      La mayoría de tus clientas te abrirán desde el teléfono, casi siempre
+      viniendo de Instagram. La web está pensada primero para esa pantalla.
+    </p>
+    <div class="grid g2" style="align-items:center">
+      <div class="phone">
+        <img src="capturas/06-home-movil.png" alt="Inicio en el móvil" />
+      </div>
+      <div>
+        <ul class="checks">
+          <li><b>Carga rápida</b> — fotos optimizadas y web ligera.</li>
+          <li><b>Menú claro</b> — colección, probador y cesta siempre a mano.</li>
+          <li><b>Compra sin fricción</b> — ver, probar y pedir en pocos toques.</li>
+          <li><b>Pago por Bizum</b> y métodos habituales en España.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBADOR AR ================= -->
+<section>
+  <div class="wrap">
+    <h2>El probador de realidad aumentada</h2>
+    <p class="sub">
+      El corazón del proyecto. La clienta activa la cámara o sube una foto, y la
+      pieza se coloca sobre ella con el tamaño y la caída reales. Probarse algo
+      es el paso que más ventas desbloquea.
+    </p>
+    <div class="shot">
+      <img src="capturas/04-provador-desktop.png" alt="Probador virtual" />
+    </div>
+    <p class="shot-cap">Probador · la clienta elige la pieza, ajusta tamaño y posición, y guarda la foto.</p>
+
+    <h3 style="margin-top:34px;font-size:1.15rem">Ejemplos de piezas que ya se prueban</h3>
+    <p style="color:var(--humo);font-size:.95rem;margin:6px 0 18px">
+      Cada pieza se coloca sola en su sitio: los pendientes en la oreja y el
+      collar colgando del cuello, con el tamaño ajustado a la cara.
+    </p>
+    <div class="piezas">
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/argolla-dorada.svg" alt="Pendiente Argolla Doha" /></div>
+        <figcaption><b>Argolla Doha</b><span>Pendiente · oreja</span></figcaption>
+      </figure>
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/cascada-perlas.svg" alt="Pendiente Cascada de Perlas" /></div>
+        <figcaption><b>Cascada de Perlas</b><span>Pendiente · oreja</span></figcaption>
+      </figure>
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/gota-cristal.svg" alt="Pendiente Gota de Cristal" /></div>
+        <figcaption><b>Gota de Cristal</b><span>Pendiente · oreja</span></figcaption>
+      </figure>
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/medallon-vintage.svg" alt="Pendiente Medallón Vintage" /></div>
+        <figcaption><b>Medallón Vintage</b><span>Pendiente · oreja</span></figcaption>
+      </figure>
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/collar-cadena.svg" alt="Collar Cadena Fina" /></div>
+        <figcaption><b>Collar Cadena Fina</b><span>Collar · cuello</span></figcaption>
+      </figure>
+      <figure class="pieza">
+        <div class="pieza-img"><img src="capturas/piezas/set-oro.svg" alt="Set Medida" /></div>
+        <figcaption><b>Set Medida</b><span>Conjunto · oreja</span></figcaption>
+      </figure>
+    </div>
+    <p class="shot-cap">
+      Las medidas se adaptan al largo real de cada pieza: un collar largo cae
+      hacia el pecho y uno corto se queda en la base del cuello.
+    </p>
+
+    <div class="grid g2" style="margin-top:34px;align-items:center">
+      <div class="phone">
+        <img src="capturas/07-provador-movil.png" alt="Probador en el móvil" />
+      </div>
+      <div>
+        <h3>Pensado para usarlo con el móvil en la mano</h3>
+        <p style="color:var(--humo);margin-top:8px">
+          La clienta abre el enlace de Instagram, entra al probador, elige la
+          pieza y se la ve en su propia cara. Sin app, sin cuenta y sin salir de
+          la web.
+        </p>
+        <ul class="checks" style="margin-top:18px">
+          <li><b>Un toque</b> para cambiar de pieza.</li>
+          <li><b>Deslizador de tamaño</b> para ajustar a su gusto.</li>
+          <li><b>Guardar y compartir</b> la foto del resultado.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card"><div class="body">
+        <span class="num">1</span>
+        <h3>Cámara o foto</h3>
+        <p>Funciona en directo o con una foto ya hecha, sin instalar ninguna app.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="num">2</span>
+        <h3>Colocación real</h3>
+        <p>Detecta el rostro y ajusta el collar o los pendientes al tamaño de la cara.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="num">3</span>
+        <h3>Foto para enseñar</h3>
+        <p>Se guarda una imagen para compartir por WhatsApp o enseñar a una amiga.</p>
+      </div></div>
+    </div>
+    <div class="note">
+      <b>Privacidad garantizada.</b> El reconocimiento ocurre dentro del móvil de
+      la clienta: la imagen de la cámara nunca se envía a ningún servidor. Es un
+      argumento de confianza y cumple el RGPD sin complicaciones.
+    </div>
+  </div>
+</section>
+
+<!-- ================= COLECCION ================= -->
+<section>
+  <div class="wrap">
+    <h2>La colección</h2>
+    <p class="sub">
+      Todas las piezas en una cuadrícula limpia. Las ofertas y el “últimas
+      unidades” se marcan automáticamente: tú solo rellenas el precio rebajado
+      o el stock, sin tocar nada de diseño.
+    </p>
+    <div class="shot">
+      <img src="capturas/02-coleccion-desktop.png" alt="Página de colección" />
+    </div>
+    <p class="shot-cap">Colección · filtra por categoría y entra en cada pieza.</p>
+  </div>
+</section>
+
+<!-- ================= FICHA ================= -->
+<section>
+  <div class="wrap">
+    <h2>Ficha de cada pieza</h2>
+    <p class="sub">
+      Fotos grandes, precio, disponibilidad y un botón directo para probársela
+      en realidad aumentada antes de añadirla a la cesta.
+    </p>
+    <div class="shot">
+      <img src="capturas/03-producto-desktop.png" alt="Ficha de producto" />
+    </div>
+    <p class="shot-cap">Pieza · info, “Pruébala”, y añadir a la cesta.</p>
+  </div>
+</section>
+
+<!-- ================= COMO COMPRAR ================= -->
+<section>
+  <div class="wrap">
+    <h2>Cómo comprar y confianza</h2>
+    <p class="sub">
+      Una página que resuelve las dudas antes de que la clienta las tenga:
+      envío, pago, devoluciones y atención. Y el bloque legal completo, que hoy
+      es obligatorio para vender online en España.
+    </p>
+    <div class="shot">
+      <img src="capturas/05-como-comprar-desktop.png" alt="Cómo comprar" />
+    </div>
+    <p class="shot-cap">Cómo comprar · envíos, pagos, prueba virtual y contacto.</p>
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card"><div class="body">
+        <h3>Páginas legales incluidas</h3>
+        <p>Aviso legal · Política de privacidad · Política de cookies · Condiciones de venta.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Confianza de marca</h3>
+        <p>Atención cercana, pago por Bizum y la marca real de la tienda de Mislata.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PANEL ================= -->
+<section>
+  <div class="wrap">
+    <h2>Tu panel, sin depender de nadie</h2>
+    <p class="sub">
+      Aquí está el valor del día a día: cambiar precios, subir fotos o marcar
+      ofertas es tan fácil como escribir en una libreta.
+    </p>
+    <div class="grid g2">
+      <div class="card"><div class="body">
+        <span class="num">✦</span>
+        <h3>Publicar una pieza</h3>
+        <p>Título, precio, foto y categoría. Pulsas “Publicar” y aparece en la web.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="num">✦</span>
+        <h3>Marcar una oferta</h3>
+        <p>Rellenas el “precio antes” y la etiqueta −% sale sola. Stock bajo → “últimas unidades”.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="num">✦</span>
+        <h3>Cambiar la portada</h3>
+        <p>Sustituyes la imagen principal de la página de inicio desde el propio panel.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="num">✦</span>
+        <h3>Publicación inmediata</h3>
+        <p>Con el webhook conectado, en cuanto publicas se ve en la web en segundos.</p>
+      </div></div>
+    </div>
+    <div class="note">
+      Se entrega una <b>guía paso a paso</b> para que puedas gestionarlo todo tú,
+      sin llamar a nadie para cambiar un precio.
+    </div>
+  </div>
+</section>
+
+<!-- ================= VALOR ================= -->
+<section>
+  <div class="wrap">
+    <h2>Lo que ahorras (o ganas) frente a las alternativas</h2>
+    <p class="sub">Comparado con las opciones habituales para una tienda de joyería.</p>
+    <div class="grid g3">
+      <div class="card"><div class="body">
+        <h3>Shopify</h3>
+        <p><b>≈ 39 €/mes</b> + apps: el probador AR es una app de pago y las comisiones suben. Y el diseño siempre parece “tienda genérica”.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Probador de AR a medida</h3>
+        <p>Solo la función del probador, hecho por una agencia, suele costar <b>2.500–6.000 €</b> por sí sola.</p>
+      </div></div>
+      <div class="card" style="border-color:var(--oro)"><div class="body">
+        <h3>Esta web</h3>
+        <p>Diseño propio de joyería, probador incluido, panel y guía. <b>Sin cuotas mensuales de plataforma</b> ni alquilar un diseño ajeno.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROPUESTA ================= -->
+<section>
+  <div class="wrap">
+    <h2>Propuesta económica</h2>
+    <p class="sub">
+      Precios de referencia para el mercado de Valencia (España), sin IVA.
+      Las cifras son una horquilla honesta según el detalle final.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Concepto</th><th>Qué incluye</th><th style="text-align:right">Precio</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Diseño y desarrollo de la web</td>
+          <td>Inicio, colección, ficha, cómo comprar, carrito, textos y páginas legales. Diseño exclusivo.</td>
+          <td class="precio" style="text-align:right">1.800 – 2.600 €</td>
+        </tr>
+        <tr>
+          <td>Probador de realidad aumentada</td>
+          <td>Colocación de piezas en tiempo real, cámara y foto, ajustes de tamaño, guardar imagen.</td>
+          <td class="precio" style="text-align:right">900 – 1.500 €</td>
+        </tr>
+        <tr>
+          <td>Panel de gestión (Sanity)</td>
+          <td>Alta de piezas, ofertas automáticas, portada editable y guía de uso.</td>
+          <td class="precio" style="text-align:right">450 – 700 €</td>
+        </tr>
+        <tr>
+          <td>Carga inicial de catálogo</td>
+          <td>Importación desde Instagram y revisión de las primeras piezas.</td>
+          <td class="precio" style="text-align:right">200 – 350 €</td>
+        </tr>
+        <tr>
+          <td>Dominio, correo y legal</td>
+          <td>Puesta en marcha, dominio, correo profesional y aviso legal/privacidad/cookies.</td>
+          <td class="precio" style="text-align:right">200 – 350 €</td>
+        </tr>
+        <tr class="total">
+          <td colspan="2">Total del proyecto (una sola vez, sin IVA)</td>
+          <td class="precio" style="text-align:right">3.550 – 5.500 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid g2" style="margin-top:34px">
+      <div class="card"><div class="body">
+        <h3>Mantenimiento (opcional)</h3>
+        <p>
+          Copias de seguridad, actualizaciones, cambios pequeños y soporte.
+          <b style="color:var(--oro-suave)">60 – 120 €/mes</b> (o tickets sueltos de 40–60 €/hora).
+        </p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Costes de terceros (no son para mí)</h3>
+        <p>
+          Dominio <b>≈ 12–15 €/año</b> · alojamiento <b>0 €</b> (plan gratuito de
+          Vercel) · Sanity <b>0 €</b> (plan gratuito) · correo profesional
+          <b>≈ 6 €/mes</b>. Son cuentas a tu nombre.
+        </p>
+      </div></div>
+    </div>
+
+    <div class="note">
+      <b>Cómo lo plantearía:</b> un <b>50% al aceptar</b> y un <b>50% a la
+      entrega</b>. El proyecto ya está prácticamente terminado, así que se puede
+      entregar en muy pocos días. Los valores se ajustan según las piezas finales
+      y el ámbito que decidas.
+    </div>
+  </div>
+</section>
+
+<!-- ================= CIERRE ================= -->
+<section style="border-bottom:none">
+  <div class="wrap">
+    <h2>Siguiente paso</h2>
+    <p class="sub">
+      La web está casi lista. Para terminarla solo faltan unas cuantas cosas
+      tuyas: fotos definitivas de las piezas, teléfono, correo, métodos de pago
+      y los datos legales de la tienda.
+    </p>
+    <ul class="checks">
+      <li>Fotos de las piezas (fondo blanco) y, para el probador, una por pieza recortada.</li>
+      <li>Datos de contacto y dirección (Mislata, Valencia).</li>
+      <li>Pagos (Bizum y otros) y condiciones de envío y devolución.</li>
+      <li>Datos fiscales de la empresa para las páginas legales.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>JP Accesorios</b> · Presentación del proyecto · Mislata, Valencia · 2026</p>
+    <p style="margin-top:8px">Documento de trabajo. Las cifras son orientativas y sin IVA.</p>
+  </div>
+</footer>
+
+</body>
+</html>
